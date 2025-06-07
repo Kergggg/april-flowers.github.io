@@ -322,7 +322,6 @@
                 idleTimer = setTimeout(resetToCenter, 2000);
             });
             
-            // Адаптация для мобильных устройств
             document.addEventListener('touchmove', function(e) {
                 const touch = e.touches[0];
                 const y = touch.clientY / window.innerHeight;

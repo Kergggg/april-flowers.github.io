@@ -182,12 +182,12 @@
             overflow-x: auto;
             scroll-behavior: smooth;
             padding: 10px 0;
-            scrollbar-width: none; /* Firefox */
-            -ms-overflow-style: none; /* IE and Edge */
+            scrollbar-width: none;
+            -ms-overflow-style: none;
         }
         
         .gallery-scroll::-webkit-scrollbar {
-            display: none; /* Chrome, Safari, Opera */
+            display: none;
         }
         
         .gallery-item {
@@ -213,7 +213,6 @@
             display: block;
         }
         
-        /* Модальное окно */
         .modal {
             display: none;
             position: fixed;
@@ -557,7 +556,6 @@
         </footer>
     </div>
 
-    <!-- Модальное окно для просмотра изображений -->
     <div id="imageModal" class="modal">
         <span class="close" onclick="closeModal()">&times;</span>
         <img class="modal-content" id="modalImage">
@@ -592,7 +590,6 @@
                 idleTimer = setTimeout(resetToCenter, 2000);
             });
             
-            // Адаптация для мобильных устройств
             document.addEventListener('touchmove', function(e) {
                 const touch = e.touches[0];
                 const y = touch.clientY / window.innerHeight;
@@ -601,7 +598,6 @@
             }, { passive: true });
         });
 
-        // Функции для прокрутки галереи
         function scrollGallery(galleryId, amount) {
             const gallery = document.getElementById(`${galleryId}-gallery`);
             gallery.scrollBy({
@@ -610,22 +606,20 @@
             });
         }
 
-        // Функции для модального окна
         function openModal(imgSrc) {
             const modal = document.getElementById('imageModal');
             const modalImg = document.getElementById('modalImage');
             modal.style.display = "block";
             modalImg.src = imgSrc;
-            document.body.style.overflow = 'hidden'; // Запрещаем прокрутку страницы
+            document.body.style.overflow = 'hidden';
         }
 
         function closeModal() {
             const modal = document.getElementById('imageModal');
             modal.style.display = "none";
-            document.body.style.overflow = 'auto'; // Возвращаем прокрутку страницы
+            document.body.style.overflow = 'auto';
         }
 
-        // Закрытие модального окна при клике вне изображения
         window.onclick = function(event) {
             const modal = document.getElementById('imageModal');
             if (event.target == modal) {
@@ -633,7 +627,6 @@
             }
         }
 
-        // Закрытие модального окна по клавише ESC
         document.addEventListener('keydown', function(event) {
             const modal = document.getElementById('imageModal');
             if (event.key === 'Escape' && modal.style.display === 'block') {

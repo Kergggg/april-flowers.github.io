@@ -139,9 +139,8 @@
             color: #333;
         }
         
-        /* Специальный стиль для ячеек с названиями "Хэд", "Халф", "Фулл" */
         .price-table th.format-name {
-            background-color: rgba(200, 230, 255, 0.8); /* Более светлый цвет */
+            background-color: rgba(200, 230, 255, 0.8);
         }
         
         .price-table tr:nth-child(even) {
@@ -395,7 +394,6 @@
                 idleTimer = setTimeout(resetToCenter, 2000);
             });
             
-            // Адаптация для мобильных устройств
             document.addEventListener('touchmove', function(e) {
                 const touch = e.touches[0];
                 const y = touch.clientY / window.innerHeight;
