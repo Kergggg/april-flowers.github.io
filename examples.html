@@ -1,67 +1,645 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Сайт Шевцовой Илоны</title>
+    <title>Примеры работ | Сайт Шевцовой Илоны</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Comic+Sans+MS&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+            font-family: 'Comic Sans MS', cursive;
+            color: #333;
+            line-height: 1.6;
+            box-sizing: border-box;
+            overflow-x: hidden;
+        }
+        
+        .gradient-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: linear-gradient(
+                to bottom,
+                #a8d8ea 0%,
+                #b8c4ff 25%,
+                #d4b5fd 50%,
+                #f8b5d6 75%,
+                #ffc8a2 100%
+            );
+            background-size: 100% 500%;
+            background-position: 0% 0%;
+            transition: background-position 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            font-family: 'Comic Sans MS', cursive;
+        }
+        
+        .white-frame {
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            width: calc(100% - 40px);
+            font-family: 'Comic Sans MS', cursive;
+        }
+        
+        .header-content {
+            display: flex;
+            flex-wrap: wrap;
+            margin-bottom: 10px;
+        }
+        
+        .title-nav-wrapper {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            flex-wrap: wrap;
+        }
+        
+        h1 {
+            font-family: 'Great Vibes', cursive;
+            font-size: 4rem;
+            color: white;
+            margin: 0;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            font-weight: normal;
+            letter-spacing: 1px;
+        }
+        
+        .welcome-text {
+            color: #333;
+            font-size: 1.1rem;
+            margin: 10px 0;
+            font-family: 'Comic Sans MS', cursive;
+        }
+        
+        nav {
+            margin-left: auto;
+            font-family: 'Comic Sans MS', cursive;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            flex-wrap: wrap;
+            font-family: 'Comic Sans MS', cursive;
+        }
+        
+        nav li {
+            margin-left: 15px;
+            font-family: 'Comic Sans MS', cursive;
+        }
+        
+        nav a {
+            text-decoration: none;
+            color: #555;
+            font-size: 0.9rem;
+            padding: 8px 15px;
+            transition: all 0.3s ease;
+            border-bottom: 1px solid transparent;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 5px;
+            white-space: nowrap;
+            font-family: 'Comic Sans MS', cursive;
+        }
+        
+        nav a:hover {
+            color: #333;
+            border-bottom: 1px solid #333;
+            background-color: rgba(255, 255, 255, 0.9);
+        }
+        
+        .gallery-section {
+            margin-bottom: 40px;
+            overflow: hidden;
+            font-family: 'Comic Sans MS', cursive;
+        }
+        
+        .gallery-section h2 {
+            font-family: 'Comic Sans MS', cursive;
+            color: #555;
+            border-bottom: 2px solid rgba(175, 213, 254, 0.7);
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .gallery-scroll-container {
+            position: relative;
+            margin: 0 -10px;
+        }
+        
+        .scroll-button {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 2;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            border: none;
+            opacity: 0.7;
+            transition: opacity 0.3s;
+            font-family: 'Comic Sans MS', cursive;
+        }
+        
+        .scroll-button:hover {
+            opacity: 1;
+        }
+        
+        .scroll-button.left {
+            left: 10px;
+        }
+        
+        .scroll-button.right {
+            right: 10px;
+        }
+        
+        .gallery-scroll {
+            display: flex;
+            overflow-x: auto;
+            scroll-behavior: smooth;
+            padding: 10px 0;
+            scrollbar-width: none; /* Firefox */
+            -ms-overflow-style: none; /* IE and Edge */
+        }
+        
+        .gallery-scroll::-webkit-scrollbar {
+            display: none; /* Chrome, Safari, Opera */
+        }
+        
+        .gallery-item {
+            flex: 0 0 auto;
+            width: 250px;
+            margin: 0 10px;
+            background-color: rgba(255, 255, 255, 0.6);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .gallery-item:hover {
+            transform: translateY(-5px) scale(1.02);
+        }
+        
+        .gallery-item img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            display: block;
+        }
+        
+        /* Модальное окно */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 100;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            overflow: auto;
+        }
+        
+        .modal-content {
+            margin: auto;
+            display: block;
+            max-width: 90%;
+            max-height: 90%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        
+        .close {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: #fff;
+            font-size: 35px;
+            font-weight: bold;
+            cursor: pointer;
+            font-family: 'Comic Sans MS', cursive;
+        }
+        
+        .note-text {
+            font-family: 'Comic Sans MS', cursive;
+            font-size: 0.9rem;
+            color: #666;
+            margin-top: 10px;
+            padding: 10px;
+            background-color: rgba(200, 230, 255, 0.5);
+            border-radius: 5px;
+        }
+        
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            font-family: 'Comic Sans MS', cursive;
+        }
+        
+        .footer a {
+            color: #555;
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            padding: 8px 15px;
+            background-color: rgba(255, 255, 255, 0.6);
+            border-radius: 5px;
+            display: inline-block;
+            font-family: 'Comic Sans MS', cursive;
+        }
+        
+        .footer a:hover {
+            color: #333;
+            background-color: rgba(255, 255, 255, 0.7);
+        }
+        
+        .social-icon {
+            font-size: 1rem;
+            margin-right: 5px;
+        }
+        
+        @media (max-width: 768px) {
+            .title-nav-wrapper {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            h1 {
+                font-size: 3rem;
+                margin-bottom: 15px;
+            }
+            
+            nav {
+                margin-left: 0;
+                width: 100%;
+            }
+            
+            nav ul {
+                justify-content: flex-start;
+            }
+            
+            nav li {
+                margin: 0 10px 10px 0;
+            }
+            
+            .gallery-item {
+                width: 200px;
+            }
+            
+            .gallery-item img {
+                height: 200px;
+            }
+            
+            .white-frame {
+                width: calc(100% - 20px);
+                padding: 15px;
+            }
+            
+            .scroll-button {
+                width: 30px;
+                height: 30px;
+                font-size: 14px;
+            }
+        }
+    </style>
 </head>
 <body>
-    <header class="header">
-        <h1>Примеры работ</h1>
-        <p>
-            В этом разделе вы можете ознакомиться с примерами моих работ в различных форматах.
-        </p>
-        <nav>
-            <ul>
-                <li><a href="/index.html">Детали заказа</a></li>
-                <li><a href="/price_list.html">Прайс-лист</a></li>
-                <li><a href="/examples.html">Примеры работ</a></li>
-                <li><a href="/terminology.html">Терминология</a></li>
-            </ul>
-        </nav>
-    </header>
-    
-    <main class="main">
-        <article>
-            <h1>Полноценные работы в диджитале</h1>
-            <img src="" alt="" width="">
-        </article>
+    <div class="gradient-bg" id="gradientBg"></div>
+    <div class="container">
+        <header class="header">
+            <div class="header-content">
+                <div class="title-nav-wrapper">
+                    <h1>Апрельские цветы</h1>
+                    <nav>
+                        <ul>
+                            <li><a href="/index.html">Главная</a></li>
+                            <li><a href="/price_list.html">Прайс-лист</a></li>
+                            <li><a href="/examples.html">Примеры работ</a></li>
+                            <li><a href="/terminology.html">Терминология</a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </header>
+        
+        <main class="main">
+            <div class="white-frame">
+                <p class="welcome-text">В этом разделе вы можете ознакомиться с примерами моих работ в различных форматах</p>
+                
+                <div class="gallery-section">
+                    <h2>Полноценные работы в диджитале</h2>
+                    <div class="gallery-scroll-container">
+                        <button class="scroll-button left" onclick="scrollGallery('digital', -250)"><i class="fas fa-chevron-left"></i></button>
+                        <div class="gallery-scroll" id="digital-gallery">
+                            <div class="gallery-item" onclick="openModal('./static/Full_art_digital/Full_art_digital_1.png')">
+                                <img src="./static/Full_art_digital/Full_art_digital_1.png" alt="Полноценка в дидже 1">
+                            </div>
+                            <div class="gallery-item" onclick="openModal('./static/Full_art_digital/Full_art_digital_2.png')">
+                                <img src="./static/Full_art_digital/Full_art_digital_2.png" alt="Полноценка в дидже 2">
+                            </div>
+                            <div class="gallery-item" onclick="openModal('./static/Full_art_digital/Full_art_digital_3.png')">
+                                <img src="./static/Full_art_digital/Full_art_digital_3.png" alt="Полноценка в дидже 3">
+                            </div>
+                            <div class="gallery-item" onclick="openModal('./static/Full_art_digital/Full_art_digital_4.png')">
+                                <img src="./static/Full_art_digital/Full_art_digital_4.png" alt="Полноценка в дидже 4">
+                            </div>
+                            <div class="gallery-item" onclick="openModal('./static/Full_art_digital/Full_art_digital_5.png')">
+                                <img src="./static/Full_art_digital/Full_art_digital_5.png" alt="Полноценка в дидже 5">
+                            </div>
+                            <div class="gallery-item" onclick="openModal('./static/Full_art_digital/Full_art_digital_6.png')">
+                                <img src="./static/Full_art_digital/Full_art_digital_6.png" alt="Полноценка в дидже 6">
+                            </div>
+                            <div class="gallery-item" onclick="openModal('./static/Full_art_digital/Full_art_digital_7.png')">
+                                <img src="./static/Full_art_digital/Full_art_digital_7.png" alt="Полноценка в дидже 7">
+                            </div>
+                            <div class="gallery-item" onclick="openModal('./static/Full_art_digital/Full_art_digital_8.png')">
+                                <img src="./static/Full_art_digital/Full_art_digital_8.png" alt="Полноценка в дидже 8">
+                            </div>
+                            <div class="gallery-item" onclick="openModal('./static/Full_art_digital/Full_art_digital_9.png')">
+                                <img src="./static/Full_art_digital/Full_art_digital_9.png" alt="Полноценка в дидже 9">
+                            </div>
+                        </div>
+                        <button class="scroll-button right" onclick="scrollGallery('digital', 250)"><i class="fas fa-chevron-right"></i></button>
+                    </div>
+                </div>
 
-        <article>
-            <h1>Полноценные работы в традише</h1>
-            <img src="" alt="" width="">
-        </article>
+                <div class="gallery-section">
+                    <h2>Полноценные работы в традише</h2>
+                    <div class="gallery-scroll-container">
+                        <button class="scroll-button left" onclick="scrollGallery('tradish', -250)"><i class="fas fa-chevron-left"></i></button>
+                        <div class="gallery-scroll" id="tradish-gallery">
+                            <div class="gallery-item" onclick="openModal('./static/Full_art_tradish/Full_art_tradish_1.png')">
+                                <img src="./static/Full_art_tradish/Full_art_tradish_1.png" alt="Полноценка в традише 1">
+                            </div>
+                            <div class="gallery-item" onclick="openModal('./static/Full_art_tradish/Full_art_tradish_2.jpg')">
+                                <img src="./static/Full_art_tradish/Full_art_tradish_2.jpg" alt="Полноценка в традише 2">
+                            </div>
+                            <div class="gallery-item" onclick="openModal('./static/Full_art_tradish/Full_art_tradish_3.png')">
+                                <img src="./static/Full_art_tradish/Full_art_tradish_3.png" alt="Полноценка в традише 3">
+                            </div>
+                            <div class="gallery-item" onclick="openModal('./static/Full_art_tradish/Full_art_tradish_4.jpg')">
+                                <img src="./static/Full_art_tradish/Full_art_tradish_4.jpg" alt="Полноценка в традише 4">
+                            </div>
+                        </div>
+                        <button class="scroll-button right" onclick="scrollGallery('tradish', 250)"><i class="fas fa-chevron-right"></i></button>
+                    </div>
+                </div>
 
-        <article>
-            <h1>Полноценные работы акварелью</h1>
-            <img src="" alt="" width="">
-        </article>
+                <div class="gallery-section">
+                    <h2>Полноценные работы акварелью</h2>
+                    <div class="gallery-scroll-container">
+                        <button class="scroll-button left" onclick="scrollGallery('watercolor', -250)"><i class="fas fa-chevron-left"></i></button>
+                        <div class="gallery-scroll" id="watercolor-gallery">
+                            <div class="gallery-item" onclick="openModal('./static/Watercolor_art/Watercolor_art_1.jpg')">
+                                <img src="./static/Watercolor_art/Watercolor_art_1.jpg" alt="Акварельная работа 1">
+                            </div>
+                            <div class="gallery-item" onclick="openModal('./static/Watercolor_art/Watercolor_art_2.jpg')">
+                                <img src="./static/Watercolor_art/Watercolor_art_2.jpg" alt="Акварельная работа 2">
+                            </div>
+                            <div class="gallery-item" onclick="openModal('./static/Watercolor_art/Watercolor_art_3.jpg')">
+                                <img src="./static/Watercolor_art/Watercolor_art_3.jpg" alt="Акварельная работа 3">
+                            </div>
+                        </div>
+                        <button class="scroll-button right" onclick="scrollGallery('watercolor', 250)"><i class="fas fa-chevron-right"></i></button>
+                    </div>
+                </div>
 
-        <article>
-            <h1>Скетчи в диджитале</h1>
-            <img src="" alt="" width="">
-        </article>
+                <div class="gallery-section">
+                    <h2>Скетчи в диджитале</h2>
+                    <div class="gallery-scroll-container">
+                        <button class="scroll-button left" onclick="scrollGallery('sketch-digital', -250)"><i class="fas fa-chevron-left"></i></button>
+                        <div class="gallery-scroll" id="sketch-digital-gallery">
+                            <div class="gallery-item" onclick="openModal('./static/Sketch_in_color/Sketch_in_color_1.png')">
+                                <img src="./static/Sketch_in_color/Sketch_in_color_1.png" alt="Скетч в дидже в цвете 1">
+                            </div>
+                            <div class="gallery-item" onclick="openModal('./static/Sketch_in_color/Sketch_in_color_2.png')">
+                                <img src="./static/Sketch_in_color/Sketch_in_color_2.png" alt="Скетч в дидже в цвете 2">
+                            </div>
+                            <div class="gallery-item" onclick="openModal('./static/Sketch_in_color/Sketch_in_color_3.png')">
+                                <img src="./static/Sketch_in_color/Sketch_in_color_3.png" alt="Скетч в дидже в цвете 3">
+                            </div>
+                            <div class="gallery-item" onclick="openModal('./static/Sketch_in_color/Sketch_in_color_4.png')">
+                                <img src="./static/Sketch_in_color/Sketch_in_color_4.png" alt="Скетч в дидже в цвете 4">
+                            </div>
+                            <div class="gallery-item" onclick="openModal('./static/Sketch_in_color/Sketch_in_color_5.jpg')">
+                                <img src="./static/Sketch_in_color/Sketch_in_color_5.jpg" alt="Скетч в дидже в цвете 5">
+                            </div>
+                        </div>
+                        <button class="scroll-button right" onclick="scrollGallery('sketch-digital', 250)"><i class="fas fa-chevron-right"></i></button>
+                    </div>
+                </div>
 
-        <article>
-            <h1>Скетчи в традише</h1>
-            <img src="" alt="" width="">
-        </article>
+                <div class="gallery-section">
+                    <h2>Скетчи в традише</h2>
+                    <div class="gallery-scroll-container">
+                        <button class="scroll-button left" onclick="scrollGallery('sketch', -250)"><i class="fas fa-chevron-left"></i></button>
+                        <div class="gallery-scroll" id="sketch-gallery">
+                            <div class="gallery-item" onclick="openModal('./static/Sketch/Sketch_1.jpg')">
+                                <img src="./static/Sketch/Sketch_1.jpg" alt="Скетч в традише без цвета 1">
+                            </div>
+                            <div class="gallery-item" onclick="openModal('./static/Sketch/Sketch_2.jpg')">
+                                <img src="./static/Sketch/Sketch_2.jpg" alt="Скетч в традише без цвета 2">
+                            </div>
+                            <div class="gallery-item" onclick="openModal('./static/Sketch/Sketch_3.jpg')">
+                                <img src="./static/Sketch/Sketch_3.jpg" alt="Скетч в традише без цвета 3">
+                            </div>
+                            <div class="gallery-item" onclick="openModal('./static/Sketch/Sketch_4.jpg')">
+                                <img src="./static/Sketch/Sketch_4.jpg" alt="Скетч в традише без цвета 4">
+                            </div>
+                            <div class="gallery-item" onclick="openModal('./static/Sketch/Sketch_5.jpg')">
+                                <img src="./static/Sketch/Sketch_5.jpg" alt="Скетч в традише без цвета 5">
+                            </div>
+                            <div class="gallery-item" onclick="openModal('./static/Sketch/Sketch_6.jpg')">
+                                <img src="./static/Sketch/Sketch_6.jpg" alt="Скетч в традише без цвета 6">
+                            </div>
+                            <div class="gallery-item" onclick="openModal('./static/Sketch/Sketch_7.png')">
+                                <img src="./static/Sketch/Sketch_7.png" alt="Скетч в традише без цвета 7">
+                            </div>
+                            <div class="gallery-item" onclick="openModal('./static/Sketch/Sketch_8.jpg')">
+                                <img src="./static/Sketch/Sketch_8.jpg" alt="Скетч в традише без цвета 8">
+                            </div>
+                            <div class="gallery-item" onclick="openModal('./static/Sketch/Sketch_9.jpg')">
+                                <img src="./static/Sketch/Sketch_9.jpg" alt="Скетч в традише без цвета 9">
+                            </div>
+                            <div class="gallery-item" onclick="openModal('./static/Sketch/Sketch_10.jpg')">
+                                <img src="./static/Sketch/Sketch_10.jpg" alt="Скетч в традише без цвета 10">
+                            </div>
+                        </div>
+                        <button class="scroll-button right" onclick="scrollGallery('sketch', 250)"><i class="fas fa-chevron-right"></i></button>
+                    </div>
+                    <p class="note-text">Небольшая пометочка: для заказчиков я использую только белую бумагу ^^</p>
+                </div>
 
-        <article>
-            <h1>Чиби</h1>
-            <img src="" alt="" width="">
-        </article>
+                <div class="gallery-section">
+                    <h2>Чиби</h2>
+                    <div class="gallery-scroll-container">
+                        <button class="scroll-button left" onclick="scrollGallery('chibi', -250)"><i class="fas fa-chevron-left"></i></button>
+                        <div class="gallery-scroll" id="chibi-gallery">
+                            <div class="gallery-item" onclick="openModal('./static/Chibi/Chibi_1.jpg')">
+                                <img src="./static/Chibi/Chibi_1.jpg" alt="Чиби арт 1">
+                            </div>
+                            <div class="gallery-item" onclick="openModal('./static/Chibi/Chibi_2.png')">
+                                <img src="./static/Chibi/Chibi_2.png" alt="Чиби арт 2">
+                            </div>
+                            <div class="gallery-item" onclick="openModal('./static/Chibi/Chibi_3.jpg')">
+                                <img src="./static/Chibi/Chibi_3.jpg" alt="Чиби арт 3">
+                            </div>
+                            <div class="gallery-item" onclick="openModal('./static/Chibi/Chibi_4.png')">
+                                <img src="./static/Chibi/Chibi_4.png" alt="Чиби арт 4">
+                            </div>
+                            <div class="gallery-item" onclick="openModal('./static/Chibi/Chibi_5.jpg')">
+                                <img src="./static/Chibi/Chibi_5.jpg" alt="Чиби арт 5">
+                            </div>
+                            <div class="gallery-item" onclick="openModal('./static/Chibi/Chibi_6.png')">
+                                <img src="./static/Chibi/Chibi_6.png" alt="Чиби арт 6">
+                            </div>
+                            <div class="gallery-item" onclick="openModal('./static/Chibi/Chibi_7.png')">
+                                <img src="./static/Chibi/Chibi_7.png" alt="Чиби арт 7">
+                            </div>
+                        </div>
+                        <button class="scroll-button right" onclick="scrollGallery('chibi', 250)"><i class="fas fa-chevron-right"></i></button>
+                    </div>
+                </div>
 
-        <article>
-            <h1>Кастомы</h1>
-            <img src="" alt="" width="">
-        </article>
-    </main>
-    
-    <footer class="footer">
-        <a href="https://t.me/KorgiK69">Telegram</a>
-        <a href="https://vk.com/korgik16">ВКонтакте</a>
-    </footer>
+                <div class="gallery-section">
+                    <h2>Кастомы</h2>
+                    <div class="gallery-scroll-container">
+                        <button class="scroll-button left" onclick="scrollGallery('custom', -250)"><i class="fas fa-chevron-left"></i></button>
+                        <div class="gallery-scroll" id="custom-gallery">
+                            <div class="gallery-item" onclick="openModal('./static/Custom/Custom_1.jpg')">
+                                <img src="./static/Custom/Custom_1.jpg" alt="Кастом 1">
+                            </div>
+                            <div class="gallery-item" onclick="openModal('./static/Custom/Custom_2.jpg')">
+                                <img src="./static/Custom/Custom_2.jpg" alt="Кастом 2">
+                            </div>
+                            <div class="gallery-item" onclick="openModal('./static/Custom/Custom_3.png')">
+                                <img src="./static/Custom/Custom_3.png" alt="Кастом 3">
+                            </div>
+                        </div>
+                        <button class="scroll-button right" onclick="scrollGallery('custom', 250)"><i class="fas fa-chevron-right"></i></button>
+                    </div>
+                </div>
+            </div>
+        </main>
+        
+        <footer class="footer white-frame">
+            <a href="https://t.me/KorgiK69"><i class="fab fa-telegram social-icon"></i>Telegram</a>
+            <a href="https://vk.com/korgik16"><i class="fab fa-vk social-icon"></i>ВКонтакте</a>
+        </footer>
+    </div>
 
+    <!-- Модальное окно для просмотра изображений -->
+    <div id="imageModal" class="modal">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <img class="modal-content" id="modalImage">
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const gradientBg = document.getElementById('gradientBg');
+            const maxMovement = 80;
+            
+            document.addEventListener('mousemove', function(e) {
+                const y = e.clientY / window.innerHeight;
+                const easedY = Math.pow(y, 0.7);
+                const yPercent = easedY * 100;
+                const constrainedY = Math.min(Math.max(yPercent, 10), 90);
+                
+                gradientBg.style.backgroundPosition = `0% ${constrainedY}%`;
+            });
+            
+            let idleTimer;
+            function resetToCenter() {
+                gradientBg.style.transition = 'background-position 1.5s ease-out';
+                gradientBg.style.backgroundPosition = '0% 50%';
+                
+                setTimeout(() => {
+                    gradientBg.style.transition = 'background-position 0.3s cubic-bezier(0.25, 0.1, 0.25, 1)';
+                }, 1500);
+            }
+            
+            document.addEventListener('mousemove', function() {
+                clearTimeout(idleTimer);
+                idleTimer = setTimeout(resetToCenter, 2000);
+            });
+            
+            // Адаптация для мобильных устройств
+            document.addEventListener('touchmove', function(e) {
+                const touch = e.touches[0];
+                const y = touch.clientY / window.innerHeight;
+                const easedY = Math.pow(y, 0.7);
+                gradientBg.style.backgroundPosition = `0% ${easedY * 100}%`;
+            }, { passive: true });
+        });
+
+        // Функции для прокрутки галереи
+        function scrollGallery(galleryId, amount) {
+            const gallery = document.getElementById(`${galleryId}-gallery`);
+            gallery.scrollBy({
+                left: amount,
+                behavior: 'smooth'
+            });
+        }
+
+        // Функции для модального окна
+        function openModal(imgSrc) {
+            const modal = document.getElementById('imageModal');
+            const modalImg = document.getElementById('modalImage');
+            modal.style.display = "block";
+            modalImg.src = imgSrc;
+            document.body.style.overflow = 'hidden'; // Запрещаем прокрутку страницы
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('imageModal');
+            modal.style.display = "none";
+            document.body.style.overflow = 'auto'; // Возвращаем прокрутку страницы
+        }
+
+        // Закрытие модального окна при клике вне изображения
+        window.onclick = function(event) {
+            const modal = document.getElementById('imageModal');
+            if (event.target == modal) {
+                closeModal();
+            }
+        }
+
+        // Закрытие модального окна по клавише ESC
+        document.addEventListener('keydown', function(event) {
+            const modal = document.getElementById('imageModal');
+            if (event.key === 'Escape' && modal.style.display === 'block') {
+                closeModal();
+            }
+        });
+    </script>
 </body>
 </html>
